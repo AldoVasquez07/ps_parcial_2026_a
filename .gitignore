@@ -1,0 +1,69 @@
+### --- IDE Specific ---
+.idea/
+*.iml
+*.iws
+.vscode/
+.settings/
+.classpath
+.project
+.factorypath
+nbproject/
+nbbuild/
+nbdist/
+
+### --- Build Tools (Maven) ---
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.jar
+
+### --- Build Tools (Gradle) ---
+build/
+.gradle/
+/out/
+!gradle-wrapper.jar
+/gradlew
+/gradlew.bat
+
+### --- JUnit & Mockito (Testing) ---
+# Reportes de cobertura (JaCoCo, etc.)
+/target/site/jacoco/
+/build/reports/jacoco/
+# Reportes de tests
+/target/surefire-reports/
+/target/failsafe-reports/
+/build/test-results/
+# Logs de ejecución de tests
+*.log
+test-output/
+
+### --- Spring Boot & OS ---
+# Archivos de log de la aplicación
+logs/
+*.log
+*.log.gz
+# Archivos de configuración local (¡Cuidado con las credenciales!)
+.env
+.env.local
+application-local.properties
+application-local.yml
+# Archivos temporales de sistema
+.DS_Store
+Thumbs.db
+temp/
+tmp/
+
+### --- JRE/JDK ---
+*.class
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+*.rar
