@@ -32,18 +32,16 @@ public class UsuarioService {
 
     // Metodo para generar un codigo de Usuario: {nombre_usuario}_{id_usuario} en miniscula
     public String generarCodigo(String nombre, Long id) {
-        if (StringUtils.isBlank(nombre) || id == null) {
-            return StringUtils.EMPTY;
-        }
+        if (StringUtils.isBlank(nombre) || id == null) return StringUtils.EMPTY;
+
         String base = StringUtils.trim(nombre) + "_" + id;
         return StringUtils.upperCase(base);
     }
  
     // Metodo que simplifica y devuelve la biografia del usuario a 50 caracteres
     public String resumirBiografia(String biografia) {
-        if (StringUtils.isBlank(biografia)) {
-            return StringUtils.EMPTY;
-        }
+        if (StringUtils.isBlank(biografia)) return StringUtils.EMPTY;
+
         return StringUtils.abbreviate(StringUtils.trim(biografia), 50);
     }
 
@@ -51,4 +49,16 @@ public class UsuarioService {
     public boolean emailEsDeDominio(String email, String dominio) {
         return StringUtils.containsIgnoreCase(email, dominio);
     }
+
+    // Metodo que verifica si el nombre de usuario comienza con una letra y tiene entre 4 y 20 caracteres
+    public boolean usernameValido(String username) {
+        if (StringUtils.isBlank(username)) return false;
+
+        return StringUtils.startsWithAny(username, "a","b","c","d","e","f","g","h",
+                "i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z",
+                "A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R",
+                "S","T","U","V","W","X","Y","Z")
+                && username.length() >= 4 && username.length() <= 20;
+    }
+ 
 }
