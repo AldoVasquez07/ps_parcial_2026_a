@@ -29,5 +29,15 @@ public class UsuarioService {
     public String normalizarEmail(String email) {
         return StringUtils.isBlank(email) ? StringUtils.EMPTY : StringUtils.lowerCase(StringUtils.strip(email));
     }
+
+    // Metodo para generar un codigo de Usuario: {nombre_usuario}_{id_usuario} en miniscula
+    public String generarCodigo(String nombre, Long id) {
+        if (StringUtils.isBlank(nombre) || id == null) {
+            return StringUtils.EMPTY;
+        }
+        String base = StringUtils.trim(nombre) + "_" + id;
+        return StringUtils.upperCase(base);
+    }
+ 
  
 }
