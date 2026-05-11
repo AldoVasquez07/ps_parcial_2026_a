@@ -78,5 +78,20 @@ public class UsuarioService {
         return StringUtils.rightPad(StringUtils.capitalize(StringUtils.trim(nombre)), 20, ' ');
     }
 
+    // Metodo que cuenta la cantidad de una palabra en la biografia del usuario
+    public int contarPalabraEnBiografia(String biografia, String palabra) {
+        if (StringUtils.isBlank(biografia) || StringUtils.isBlank(palabra)) return 0;
+        return StringUtils.countMatches(biografia, palabra);
+    }
 
+    // Metodo que censura palabras especificas en la biografia del usuario a: "***"
+    public String censurarBiografia(String biografia, String palabraProhibida) {
+        if (StringUtils.isBlank(biografia)) return StringUtils.EMPTY;
+        return StringUtils.replace(biografia, palabraProhibida, "***");
+    }
+
+    // Metodo que verifica si dos usuario usuarios son los mismos
+    public boolean sonMismoUsuario(String u1, String u2) {
+        return StringUtils.equals(StringUtils.lowerCase(u1), StringUtils.lowerCase(u2));
+    }
 }
