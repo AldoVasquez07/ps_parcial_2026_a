@@ -39,5 +39,12 @@ public class UsuarioService {
         return StringUtils.upperCase(base);
     }
  
+    // Metodo que simplifica la biografia del usuario a 50 caracteres
+    public String resumirBiografia(String biografia) {
+        if (StringUtils.isBlank(biografia)) {
+            return StringUtils.EMPTY;
+        }
+        return StringUtils.abbreviate(StringUtils.trim(biografia), 50);
+    }
  
 }
