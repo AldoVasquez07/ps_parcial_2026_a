@@ -60,5 +60,10 @@ public class UsuarioService {
                 "S","T","U","V","W","X","Y","Z")
                 && username.length() >= 4 && username.length() <= 20;
     }
- 
+
+    // Metodo que genera un Token para un usuario: {NOMBRE_USUARIO}_VRF
+    public String generarTokenVerificacion(String username) {
+        if (StringUtils.isBlank(username)) return StringUtils.EMPTY;
+        return StringUtils.reverse(StringUtils.upperCase(username)) + "_VRF";
+    }
 }
