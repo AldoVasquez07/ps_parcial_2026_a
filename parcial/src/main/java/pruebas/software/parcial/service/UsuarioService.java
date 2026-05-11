@@ -20,8 +20,14 @@ public class UsuarioService {
         return StringUtils.isNotBlank(nombre) && StringUtils.isNotBlank(email);
     }
 
-    // Metodo que devuelve el nombre normalizado en caso de que no este en blanco
+    // Metodo que devuelve el nombre del usuario normalizado en caso de que no este en blanco
     public String normalizarNombre(String nombre) {
         return StringUtils.isBlank(nombre) ? StringUtils.EMPTY : StringUtils.capitalize(StringUtils.trim(nombre));
     }
+
+    // Metodo para devolver el email del usuario normalizado en caso no estar en blanco
+    public String normalizarEmail(String email) {
+        return StringUtils.isBlank(email) ? StringUtils.EMPTY : StringUtils.lowerCase(StringUtils.strip(email));
+    }
+ 
 }
