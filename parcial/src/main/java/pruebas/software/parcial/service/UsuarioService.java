@@ -66,4 +66,9 @@ public class UsuarioService {
         if (StringUtils.isBlank(username)) return StringUtils.EMPTY;
         return StringUtils.reverse(StringUtils.upperCase(username)) + "_VRF";
     }
+
+    // Metodo que formatea el id del usuario: 00000000{id}
+    public String formatearId(Long id) {
+        if (id == null) ? StringUtils.EMPTY : StringUtils.leftPad(id.toString(), 8, '0');
+    }
 }
