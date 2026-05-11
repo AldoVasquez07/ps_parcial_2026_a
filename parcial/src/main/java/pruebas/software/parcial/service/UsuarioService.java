@@ -71,4 +71,12 @@ public class UsuarioService {
     public String formatearId(Long id) {
         if (id == null) ? StringUtils.EMPTY : StringUtils.leftPad(id.toString(), 8, '0');
     }
+
+    // Metodo que genera una linea de reporte con nombre de usuario alineado a la derecha
+    public String lineaReporte(String nombre) {
+        if (StringUtils.isBlank(nombre)) return StringUtils.EMPTY;
+        return StringUtils.rightPad(StringUtils.capitalize(StringUtils.trim(nombre)), 20, ' ');
+    }
+
+
 }
