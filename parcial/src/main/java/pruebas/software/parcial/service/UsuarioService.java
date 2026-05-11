@@ -15,10 +15,13 @@ public class UsuarioService {
         this.repository = repository;
     }
 
-    // Funcion que verifica si es que el nombre o email del Usuario no estan en blanco
+    // Metodo que verifica si es que el nombre o email del Usuario no estan en blanco
     public boolean validarCamposObligatorios(String nombre, String email) {
         return StringUtils.isNotBlank(nombre) && StringUtils.isNotBlank(email);
     }
 
-    
+    // Metodo que devuelve el nombre normalizado en caso de que no este en blanco
+    public String normalizarNombre(String nombre) {
+        return StringUtils.isBlank(nombre) ? StringUtils.EMPTY : StringUtils.capitalize(StringUtils.trim(nombre));
+    }
 }
