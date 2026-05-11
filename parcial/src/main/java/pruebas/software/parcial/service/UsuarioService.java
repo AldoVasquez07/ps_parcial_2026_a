@@ -94,4 +94,65 @@ public class UsuarioService {
     public boolean sonMismoUsuario(String u1, String u2) {
         return StringUtils.equals(StringUtils.lowerCase(u1), StringUtils.lowerCase(u2));
     }
+
+    public boolean nombreSoloLetras(String nombre) {
+        if (StringUtils.isBlank(nombre)) return false;
+        return StringUtils.isAlpha(StringUtils.trim(nombre));
+    }
+ 
+    
+    // Metodo que valida que el teléfono solo contenga dígitos
+    public boolean telefonoSoloNumeros(String telefono) {
+        if (StringUtils.isBlank(telefono)) return false;
+        return StringUtils.isNumeric(StringUtils.trim(telefono));
+    }
+ 
+    // Metodo que genera el nombre completo uniendo nombre y apellido
+    public String nombreCompleto(String nombre, String apellido) {
+        return StringUtils.join(new String[]{
+                StringUtils.capitalize(StringUtils.trim(nombre)),
+                StringUtils.capitalize(StringUtils.trim(apellido))
+        }, " ");
+    }
+ 
+    // Registra un usuario después de normalizar y validar sus campos
+    // Orquesta multiples llamadas a StringUtils internamente
+    public Usuario registrarUsuario(Usuario usuario) {
+        if (!validarCamposObligatorios(usuario.getNombre(), usuario.getEmail())) {
+            throw new IllegalArgumentException("Nombre y email son obligatorios");
+        }
+        if (!nombreSoloLetras(usuario.getNombre())) {
+            throw new IllegalArgumentException("El nombre solo debe contener letras");
+        }
+        if (!usernameValido(usuario.getUsername())) {
+            throw new IllegalArgumentException("Username inválido");
+        }
+ 
+        usuario.setNombre(normalizarNombre(usuario.getNombre()));
+        usuario.setApellido(normalizarNombre(usuario.getApellido()));
+        usuario.setEmail(normalizarEmail(usuario.getEmail()));
+        usuario.setBiografia(resumirBiografia(usuario.getBiografia()));
+ 
+        return repository.save(usuario);
+    }
+ 
+    // Busca un usuario por username
+    public Optional<Usuario> buscarPorUsername(String username) {
+        if (StringUtils.isBlank(username)) return Optional.empty();
+        return repository.findByUsername(StringUtils.lowerCase(StringUtils.trim(username)));
+    }
+ 
+    // Genera el perfil público resumido del usuario.
+    public String generarPerfilPublico(Usuario usuario) {
+        String nombre    = normalizarNombre(usuario.getNombre());
+        String apellido  = normalizarNombre(usuario.getApellido());
+        String bio       = resumirBiografia(usuario.getBiografia());
+        String idFormato = formatearId(usuario.getId());
+ 
+        return StringUtils.join(new String[]{
+                "ID: "     + idFormato,
+                "NOMBRE: " + StringUtils.upperCase(nombreCompleto(nombre, apellido)),
+                "BIO: "    + (StringUtils.isBlank(bio) ? "Sin biografía" : bio)
+        }, " | ");
+    }
 }
