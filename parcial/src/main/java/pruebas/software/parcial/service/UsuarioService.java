@@ -39,12 +39,16 @@ public class UsuarioService {
         return StringUtils.upperCase(base);
     }
  
-    // Metodo que simplifica la biografia del usuario a 50 caracteres
+    // Metodo que simplifica y devuelve la biografia del usuario a 50 caracteres
     public String resumirBiografia(String biografia) {
         if (StringUtils.isBlank(biografia)) {
             return StringUtils.EMPTY;
         }
         return StringUtils.abbreviate(StringUtils.trim(biografia), 50);
     }
- 
+
+    // Metodo que verifica que el dominicio del email del usuario este presente
+    public boolean emailEsDeDominio(String email, String dominio) {
+        return StringUtils.containsIgnoreCase(email, dominio);
+    }
 }
