@@ -3,6 +3,7 @@ package pruebas.software.parcial.service;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import pruebas.software.parcial.model.Usuario;
+import pruebas.software.parcial.repository.UsuarioRepository;
  
 import java.util.Optional;
 
@@ -69,7 +70,7 @@ public class UsuarioService {
 
     // Metodo que formatea el id del usuario: 00000000{id}
     public String formatearId(Long id) {
-        if (id == null) ? StringUtils.EMPTY : StringUtils.leftPad(id.toString(), 8, '0');
+        return (id == null) ? StringUtils.EMPTY : StringUtils.leftPad(id.toString(), 8, '0');
     }
 
     // Metodo que genera una linea de reporte con nombre de usuario alineado a la derecha
